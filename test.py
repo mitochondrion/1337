@@ -16,7 +16,7 @@ class Test(TestCase):
 
     def test_maxSubArray(self):
         s = Solution()
-        input = []
-        result = s.maxSubArray(input)
-        expected_result = []
-        self.assertEqual(result, expected_result)
+        self.assertEqual(s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]), 6)
+        self.assertEqual(s.maxSubArray([-2,-1,-3,-4,-1,-2,-1,-5,-4]), -1)
+        self.assertEqual(s.maxSubArray([-2]), -2)
+        self.assertEqual(s.maxSubArray([]), 0)

@@ -76,4 +76,19 @@ class Solution:
 
     # https://leetcode.com/problems/maximum-subarray/
     def maxSubArray(self, nums: List[int]) -> int:
-        pass
+        if len(nums) is 0:
+            return 0
+
+        max_sum = nums[0]
+        current_sum = 0
+
+        for number in nums:
+            current_sum += number
+
+            if current_sum > max_sum:
+                max_sum = current_sum
+
+            if current_sum < 0:
+                current_sum = 0
+
+        return max_sum
