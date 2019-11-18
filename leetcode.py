@@ -10,7 +10,7 @@ class Solution:
             num_dict[number] = number_idx
             sum_counterpart = target - number
 
-            if (sum_counterpart is not number) and (sum_counterpart in num_dict):
+            if (sum_counterpart != number) and (sum_counterpart in num_dict):
                 return [number_idx, num_dict[target - number]]
 
     ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
@@ -34,9 +34,9 @@ class Solution:
         reverse_results: List[int] = [None] * nums_len
 
         for idx, number in enumerate(nums):
-            if idx is nums_len - 1:
+            if idx == nums_len - 1:
                 break
-            elif idx is 0:
+            elif idx == 0:
                 results[idx] = 1
                 results[idx + 1] = number
             else:
@@ -47,7 +47,7 @@ class Solution:
 
         while reverse_idx > 0:
             try:
-                if reverse_idx is last_idx:
+                if reverse_idx == last_idx:
                     reverse_results[reverse_idx] = 1
                     reverse_results[reverse_idx - 1] = nums[reverse_idx]
                 else:
@@ -62,9 +62,9 @@ class Solution:
         ######################
 
         for idx, number in enumerate(results):
-            if idx is nums_len - 1:
+            if idx == nums_len - 1:
                 break
-            elif idx is 0:
+            elif idx == 0:
                 results[0] = reverse_results[idx]
                 continue
             else:
@@ -76,7 +76,7 @@ class Solution:
 
     # https://leetcode.com/problems/maximum-subarray/
     def maxSubArray(self, nums: List[int]) -> int:
-        if len(nums) is 0:
+        if len(nums) == 0:
             return 0
 
         max_sum = nums[0]
