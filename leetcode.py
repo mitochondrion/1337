@@ -92,3 +92,63 @@ class Solution:
                 current_sum = 0
 
         return max_sum
+
+    ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
+
+    # https://leetcode.com/problems/maximum-product-subarray/
+    def maxProduct(self, nums: List[int]) -> int:
+        if len(nums) is 0:
+            return 0
+
+        max_product = None
+        current_product = None
+        current_product_len = 0
+        product_until_first_negative = 1
+        product_since_last_negative = 1
+
+        for number in nums:
+            if number == 0:
+                if max_product is None:
+                    max_product = 0
+
+                if current_product is not None:
+                    if current_product < 0 and current_product_len > 1:
+                        current_product = current_product / max(product_since_last_negative, product_until_first_negative)
+
+                    if max_product is None or current_product > max_product:
+                        max_product = current_product
+
+                current_product = None
+                current_product_len = 0
+                product_until_first_negative = 1
+                product_since_last_negative = 1
+                continue
+
+            current_product_len += 1
+
+            if current_product is None:
+                current_product = number
+            else:
+                current_product *= number
+
+            if number < 0:
+                if product_until_first_negative > 0:
+                    product_until_first_negative *= number
+
+                product_since_last_negative = number
+            else:
+                if product_until_first_negative > 0:
+                    product_until_first_negative *= number
+
+                if product_since_last_negative < 0:
+                    product_since_last_negative *= number
+
+        if current_product is not None:
+            if current_product < 0 and current_product_len > 1:
+                current_product = current_product / max(product_since_last_negative, product_until_first_negative)
+
+            if max_product is None or current_product > max_product:
+                max_product = int(current_product)
+
+        return max_product
+
