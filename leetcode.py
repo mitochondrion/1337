@@ -152,3 +152,68 @@ class Solution:
 
         return max_product
 
+    ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
+
+    # https://leetcode.com/problems/permutations/
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        permutations = [nums]
+        current_permutation = nums
+        next_permutation = self._permute_next(current_permutation)
+
+        while next_permutation != current_permutation:
+            permutations.append(next_permutation)
+            current_permutation = next_permutation
+            next_permutation = self._permute_next(current_permutation)
+
+        return permutations
+
+    def _reverse_in_place(self, nums, begin_index, end_index):
+        if end_index >= len(nums):
+            end_index = len(nums) - 1
+
+        if begin_index < 0:
+            begin_index = 0
+
+        while begin_index < end_index:
+            begin_value = nums[begin_index]
+            nums[begin_index] = nums[end_index]
+            nums[end_index] = begin_value
+            begin_index += 1
+            end_index -= 1
+
+    def _permute_next(self, current_permutation):
+        next_permutation = current_permutation.copy()
+        current_index = len(current_permutation) - 1
+
+        # Find pivot: the lowest place that is not in greater than its next lowest place
+        pivot_index = -1
+
+        for index in range(len(current_permutation) - 1, 0, -1):
+            if current_permutation[index] > current_permutation[index - 1]:
+                pivot_index = index - 1
+                break
+
+        if pivot_index < 0:
+            return next_permutation
+
+        pivot_value = current_permutation[pivot_index]
+        pivot_swap_index = -1
+        pivot_swap_value = -1
+
+        for index in range(len(current_permutation) - 1, 0, -1):
+            if current_permutation[index] > pivot_value:
+                pivot_swap_value = current_permutation[index]
+                pivot_swap_index = index
+                break
+
+        # Swap pivot
+        next_permutation[pivot_swap_index] = pivot_value
+        next_permutation[pivot_index] = pivot_swap_value
+
+        # Reverse everything after the pivot
+        self._reverse_in_place(next_permutation, pivot_index + 1, len(next_permutation) - 1)
+
+        return next_permutation
+
+

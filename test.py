@@ -84,3 +84,42 @@ class Test(TestCase):
 
         self.assertEqual(s.maxProduct([0,2,3,-2,2,4,0,1-2,3,2]), 8)
 
+
+    def test_reverseInPlace(self):
+        s = Solution()
+
+        a = [1,2,3,4,5]
+        s._reverse_in_place(a, 0, 4)
+
+        self.assertEqual(a, [5,4,3,2,1])
+
+        s._reverse_in_place(a, -3, 99)
+        self.assertEqual(a, [1,2,3,4,5])
+
+        s._reverse_in_place(a, 1, 3)
+        self.assertEqual(a, [1,4,3,2,5])
+
+        s._reverse_in_place(a, 1, 2)
+        self.assertEqual(a, [1,3,4,2,5])
+
+        s._reverse_in_place(a, 3, 2)
+        self.assertEqual(a, [1,3,4,2,5])
+
+
+    def test_permute(self):
+        s = Solution()
+
+        result = s.permute([2,1,3])
+        expected = [
+            [1,2,3],
+            [1,3,2],
+            [2,1,3],
+            [2,3,1],
+            [3,1,2],
+            [3,2,1]
+        ]
+
+        self.assertEqual(result, expected)
+
+        self.assertEqual(s.permute([]), [[]])
+        self.assertEqual(s.permute([42]), [[42]])
