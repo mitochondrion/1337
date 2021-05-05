@@ -99,7 +99,7 @@ class Solution:
 
     # https://leetcode.com/problems/maximum-product-subarray/
     def maxProduct(self, nums: List[int]) -> int:
-        if len(nums) is 0:
+        if len(nums) == 0:
             return 0
 
         max_product = None

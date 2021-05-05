@@ -1,8 +1,8 @@
-from unittest import TestCase
+import unittest
 from leetcode import *
 
 
-class Test(TestCase):
+class Test(unittest.TestCase):
     def test_productExceptSelf(self):
         s = Solution()
         input = [1,2,3,4,5,6,7,8]
@@ -123,3 +123,7 @@ class Test(TestCase):
 
         self.assertEqual(s.permute([]), [[]])
         self.assertEqual(s.permute([42]), [[42]])
+
+if __name__ == '__main__':
+    unittest.main()
+
