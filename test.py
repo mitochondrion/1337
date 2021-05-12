@@ -3,6 +3,17 @@ from leetcode import *
 
 
 class Test(unittest.TestCase):
+    def test_lengthOfLongestSubstring(self):
+        s = Solution()
+        self.assertEqual(s.lengthOfLongestSubstring('abcabcbb'), 3)
+        self.assertEqual(s.lengthOfLongestSubstring('pwwkew'), 3)
+        self.assertEqual(s.lengthOfLongestSubstring('xabcdaexfga'), 8)
+        self.assertEqual(s.lengthOfLongestSubstring('xxxxxxx'), 1)
+        self.assertEqual(s.lengthOfLongestSubstring(''), 0)
+
+    def test_addTwoNumbers(self):
+        s = Solution()
+
     def test_productExceptSelf(self):
         s = Solution()
         input = [1,2,3,4,5,6,7,8]

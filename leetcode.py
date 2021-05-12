@@ -3,7 +3,75 @@ from functools import reduce
 
 # See https://github.com/mitochondrion/LRUCache for leetcode LRUCache implementation
 
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
+    # https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        max_len = 0
+        current_len = 0
+        begin_idx = 0
+
+        # letters -> index
+        seen = {}
+
+        for idx, c in enumerate(s):
+            current_len += 1
+
+            if c in seen:
+                seen_idx = seen[c]
+
+                if seen_idx >= begin_idx:
+                    current_len = idx - seen_idx
+                    begin_idx = seen_idx + 1
+
+            if current_len > max_len:
+                max_len = current_len
+
+            seen[c] = idx
+
+        return max_len
+
+    ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
+
+    # https://leetcode.com/problems/add-two-numbers/
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        answer_head = ListNode()
+        answer = answer_head
+        answer_head.val = l1.val + l2.val
+
+        if answer.val > 9:
+            answer.val += -10
+            answer.next = ListNode(1)
+
+        while l1.next or l2.next:
+            next_val = 0
+
+            if l1.next:
+                l1 = l1.next
+                next_val += l1.val
+
+            if l2.next:
+                l2 = l2.next
+                next_val += l2.val
+
+            if not answer.next:
+                answer.next = ListNode(0)
+
+            answer = answer.next
+            answer.val += next_val
+
+            if answer.val > 9:
+                answer.val += -10
+                answer.next = ListNode(1)
+
+        return answer_head
+
+    ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
+
     # https://leetcode.com/problems/two-sum/
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         num_dict: Dict[int: int] = {}
