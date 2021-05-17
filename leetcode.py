@@ -9,6 +9,38 @@ class ListNode:
         self.next = next
 
 class Solution:
+    # https://leetcode.com/problems/nth-digit/
+    def findNthDigit(self, n: int) -> int:
+        if n < 10: return n
+
+        base = 1
+        digits_per_num = 1
+        remainder = n
+
+        while True:
+            nums_per_base = 9 * base
+            digits_per_base = nums_per_base * digits_per_num
+
+            if remainder <= digits_per_base:
+                break
+            else:
+                remainder -= digits_per_base
+                digits_per_num += 1
+                base *= 10
+
+        number = base + (remainder - 1) // (digits_per_num)
+        digit = remainder % digits_per_num
+
+        if digit == 0:
+            digit = digits_per_num
+
+        place = digits_per_num - digit
+        answer = (number % 10**(place + 1)) // 10**place
+
+        return answer
+
+    ##### 🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕🔥⽕
+
     # https://leetcode.com/problems/longest-substring-without-repeating-characters/
     def lengthOfLongestSubstring(self, s: str) -> int:
         max_len = 0
